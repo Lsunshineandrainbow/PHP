@@ -1,3 +1,7 @@
+<?php
+date_default_timezone_set("Asia/Shanghai");
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,7 +38,7 @@
 </div><!-- #EndLibraryItem --><div id="OSC_Topbar">
 	  <div id="VisitorInfo">
 		当前访客身份：
-				游客 [ <a href="login.htm">登录</a> | <a href="reg.htm">注册</a> ]
+				游客 [ <a href="welcome/login">登录</a> | <a href="welcome/reg">注册</a> ]
 				<span id="OSC_Notification">
 			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
 					</span>
@@ -63,22 +67,22 @@
 <div class="BlogList">
 <ul>
     <?php foreach($t_blog as $t_blog_list){?>
-  <li class='Blog' id='blog_24027'>
+  <li class='Blog' id='blog_<?php echo $t_blog_list->blog_id?>'>
 	<h2 class='BlogAccess_true BlogTop_0'><a href="viewPost_comment.htm"><?php echo $t_blog_list->blog_title ?></a></h2>
 
 	<div class='outline'>
 
-	  <span class='time'>发表于<?php $t_blog_list->post_time.date("Y-m-d") ?></span>
+	  <span class='time'>发表于<?php echo date('Y年m月d日 h:i',strtotime($t_blog_list->post_time)); ?></span>
 
-	  <span class='catalog'>分类: <a href="?catalog=92334">工作日志</a></span>
+	  <span class='catalog'>分类: <a href="?catalog=92334"><?php echo $t_blog_list->catalog_name?></a></span>
 
 	  <span class='stat'>统计: 0评/0阅</span>
 
 	  	</div>
 
-		<div class='TextContent' id='blog_content_24027'>
+		<div class='TextContent' id="blog_<?php echo $t_blog_list->blog_id?> ">
 
-				测试文章3
+				<?php echo $t_blog_list->blog_content?>
 
 		<div class='fullcontent'><a href="viewPost_comment.htm">阅读全文...</a></div>
 
@@ -92,9 +96,9 @@
 <div class="BlogMenu"><div class="catalogs SpaceModule">
   <strong>博客分类</strong>
   <ul class="LinkLine">
-    	<li><a href="#">工作日志(2)</a></li>
-		<li><a href="#">日常记录(0)</a></li>
-		<li><a href="#">转贴的文章(0)</a></li>
+      <?php foreach ($t_blog_catalog as $t_blog_catalog_list){ ?>
+    	<li><a href="#"><?php echo $t_blog_catalog_list->catalog_name ?>(2)</a></li>
+      <?php }?>
 	  </ul>
 </div>
 <div class="comments SpaceModule">
