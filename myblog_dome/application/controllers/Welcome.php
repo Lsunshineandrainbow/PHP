@@ -35,4 +35,20 @@ class Welcome extends CI_Controller {
     public function reg(){
         $this->load->view('reg');
     }
+    public function check_email(){
+	    $email = $this->input->get('email');
+	    $this->load->model('Blog_model');
+	    $row=$this->Blog_model->get_user_by_email($email);
+	    if (count($row)>0){
+	        echo 'fail';
+	        }else{
+	        echo 'success';
+        }
+    }
+    public function get_user_message(){
+	   $name= $this->input->get('name');
+	   $email= $this->input->get('email');
+	   $password= $this->input->get('password');
+	   $sex= $this->input->get('sex');
+    }
 }
