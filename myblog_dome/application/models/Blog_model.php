@@ -18,4 +18,10 @@
             $query = $this->db->get('t_blog_catalog');
             return $query->result();
         }
+        public function get_user_by_email($email){
+            $query = $this->db->get_where('t_user',array(
+                'email'=>$email
+            ));
+            return $query->result();
+        }
     }
