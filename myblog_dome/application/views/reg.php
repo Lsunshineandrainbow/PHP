@@ -169,7 +169,10 @@
         var flag = true;
         var name = $('#f_name').val();
         var pwd = $('#f_pwd').val();
-        console.log(name)
+        var email = $('#f_email').val();
+        var gender = $('[name=gender]:checked').val();
+
+
         if (name ==''){
             $('#name_msg').html('姓名不能为空');
             flag=false;
@@ -179,13 +182,41 @@
             flag=false;
         }
         if(flag){
-            $.get('welcome/get_user_message',{},function () {
-
-            },'text')
+            // $.get('welcome/save',{
+            //         email: email,
+            //         gender:gender,
+            //
+            //         name:name,
+            //         pwd:pwd,
+            // },function (data) {
+            //         console.log(data)
+            //
+            // },
+            var email = $('#f_email').val();
+            var sex = $('[name=gender]:checked').val();
+            var code = $('#f_vcode').val();
+            $.get('welcome/save',{
+                email:email,
+                name:name,
+                pwd:pwd,
+                sex:sex,
+                code:code
+            },function (data) {
+                if(data == 'success'){
+                    location.href = 'welcome/login';
+                }else if(data == 'code_error'){
+                    $('#code_msg').html('验证码错误');
+                }else if(data=='sex_error'){
+                    //.......
+                    $('#sex_msg').html('请选择性别');
+                    $('#sex_msg').show();
+                },
+            'text')
         }
     })
     $('#f_name').on('focus',function () {
-        $('#name_msg').html('')
+        $('#name_msg').html('');
+
     })
 </script></div>
 	<div id="OSC_Footer">© 赛斯特(WWW.SYSIT.ORG)</div>
