@@ -24,4 +24,15 @@
             ));
             return $query->result();
         }
+        public function save($email,$name,$password,$gender,$province){
+            $data=array(
+                'name'=>$name,
+                'password'=>$password,
+                'email'=>$email,
+                'sex'=>$gender,
+                'provice'=>$province
+            );
+            $query =$this->db->insert('t_user', $data);
+            return $query;
+        }
     }
