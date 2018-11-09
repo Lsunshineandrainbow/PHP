@@ -18,6 +18,10 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function _construct(){
+	    parent::__construct();
+	    $this->load->model('Blog_model');
+    }
 	public function index()
 	{
 
@@ -45,10 +49,14 @@ class Welcome extends CI_Controller {
 	        echo 'success';
         }
     }
-    public function get_user_message(){
+    public function save(){
+	    echo 666;
 	   $name= $this->input->get('name');
 	   $email= $this->input->get('email');
-	   $password= $this->input->get('password');
-	   $sex= $this->input->get('sex');
+	   $password= $this->input->get('pwd');
+	   $gender= $this->input->get('gender');
+	   $provice= $this->input->get('province');
+	   $this->Blog_model->save($email,$name,$password,$gender,$provice);
+
     }
 }
